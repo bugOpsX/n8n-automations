@@ -1,0 +1,4160 @@
+{
+  "name": "ERP-sheets-test",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1904,
+        -128
+      ],
+      "id": "24665b6c-3c84-4753-8299-fae05e050e34",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "Qz6JqQEj3HTNAEOC",
+          "name": "Google Sheets Trigger account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c4a73f3e-eeb5-4f8d-95a0-4a83ca3264c6",
+              "name": "NAME",
+              "value": "={{ $json.NAME }}",
+              "type": "string"
+            },
+            {
+              "id": "8665178e-54e2-4f89-895f-13db04200d45",
+              "name": "GATEPASSNO",
+              "value": "={{ $json.GATEPASSNO }}",
+              "type": "number"
+            },
+            {
+              "id": "9727d9a2-a799-437a-b232-aa9f34b4f768",
+              "name": "DESIGNATION",
+              "value": "={{ $json.DESIGNATION }}",
+              "type": "string"
+            },
+            {
+              "id": "2599a585-3015-413d-a08d-cd064a8da6bc",
+              "name": "ACCOUNT_NO",
+              "value": "={{ $json.ACCOUNT_NO }}",
+              "type": "number"
+            },
+            {
+              "id": "04ae8382-c988-4e61-a3fa-43159551fcc5",
+              "name": "IFSC",
+              "value": "={{ $json.IFSC }}",
+              "type": "string"
+            },
+            {
+              "id": "d2c741d7-66f9-4ce8-af61-73ae25556880",
+              "name": "AMOUNT ",
+              "value": "={{ $json['AMOUNT '] }}",
+              "type": "number"
+            },
+            {
+              "id": "aa8b536a-a56b-4bc9-9bb4-bc57f82a9c0f",
+              "name": "STATUS",
+              "value": "={{ $json.STATUS }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1696,
+        -128
+      ],
+      "id": "edce4d1c-5fd3-4791-b994-613fe1daf9b2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Google Sheets Trigger').item.json.DESIGNATION }}",
+                    "rightValue": "Helper",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "962c99ef-c647-424b-8971-de916bc1d16d"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c1329d37-adb2-4637-bd60-7844acac64bb",
+                    "leftValue": "={{ $('Google Sheets Trigger').item.json.DESIGNATION }}",
+                    "rightValue": "Welder",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c7d52837-3fb5-4109-848e-06b60219752c",
+                    "leftValue": "={{ $('Google Sheets Trigger').item.json.DESIGNATION }}",
+                    "rightValue": "Supervisor",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1b743385-40ad-46a7-b870-f2933aed2e6c",
+                    "leftValue": "={{ $('Google Sheets Trigger').item.json.DESIGNATION }}",
+                    "rightValue": "TW",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "cedf6c61-dd0a-45e0-8426-4f21bf502382",
+                    "leftValue": "={{ $('Google Sheets Trigger').item.json['AMOUNT '] }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gte"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fa03f17c-575d-4b76-b23b-915a9ea6863f",
+                    "leftValue": "={{ $json.STATUS }}",
+                    "rightValue": "PAID",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1504,
+        -192
+      ],
+      "id": "177b15d3-7ed3-4109-8558-b737a47279e3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "GATEPASSNO",
+              "lookupValue": "={{$json.GATEPASSNO}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -496,
+        -960
+      ],
+      "id": "c307e23e-ced8-4cca-98a4-60b84be146ea",
+      "name": "Helper lookup",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "DESIGNATION",
+              "lookupValue": "TW"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -512,
+        960
+      ],
+      "id": "4a1fe7fb-ecbd-4d55-b222-4ec2a0788201",
+      "name": "techwelder lookup",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "89a3337e-6889-4991-99ef-d76b34125c52",
+              "leftValue": "={{ Object.keys($json).length > 0 }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        96,
+        -960
+      ],
+      "id": "ac6596f0-2c8f-4c8e-906a-48341c2fbaa6",
+      "name": "row exists?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5e7e6fef-ac07-496a-bc4e-90529da37cc0",
+              "leftValue": "={{ $items().length > 0 }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        32,
+        960
+      ],
+      "id": "21dd46c5-f2cb-4fae-b1d1-3f20f8d8a8fc",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 642528006,
+          "mode": "list",
+          "cachedResultName": "Helpers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=642528006"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('Helper lookup').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('Helper lookup').item.json.NAME }}",
+            "DESIGNATION": "={{ $('Helper lookup').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('Helper lookup').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('Helper lookup').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('Helper lookup').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('Helper lookup').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        -848
+      ],
+      "id": "a71f3060-d6a0-434b-9d1c-ea7ba2237af7",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $('Edit Fields').item.json.GATEPASSNO }}",
+            "NAME": "={{ $('Edit Fields').item.json.NAME }}",
+            "DESIGNATION": "={{ $('Edit Fields').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('Edit Fields').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('Edit Fields').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('Edit Fields').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('Edit Fields').item.json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        256,
+        -432
+      ],
+      "id": "6d6bc1db-20ac-40e8-90f4-0db8078736c0",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('Welder lookup').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('Welder lookup').item.json.GATEPASSNO }}",
+            "DESIGNATION": "={{ $('Welder lookup').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('Welder lookup').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('Welder lookup').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('Welder lookup').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('Welder lookup').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        256,
+        -208
+      ],
+      "id": "4b306e56-d716-4fee-bfc6-e500e4daa2e0",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f1f7b49f-3abe-4750-977c-d1d51d7c0820",
+              "leftValue": "={{ $items().length > 0 }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        -320
+      ],
+      "id": "1b389941-d104-4fb7-b29d-d80c07dcb306",
+      "name": "row exists?2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5cf72a91-a3ef-406e-8ce6-023c51b92465",
+              "leftValue": "={{ $items().length > 0 }}\n",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        48,
+        384
+      ],
+      "id": "8fe825e7-7325-4793-a9c7-8b0baca1aa01",
+      "name": "row exists?1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        304,
+        240
+      ],
+      "id": "562f9f03-1e7e-4ee6-88a8-a89a95915548",
+      "name": "Update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('Supervisor lookup').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('Supervisor lookup').item.json.GATEPASSNO }}",
+            "DESIGNATION": "={{ $('Supervisor lookup').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('Supervisor lookup').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('Supervisor lookup').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('Supervisor lookup').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('Supervisor lookup').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        304,
+        496
+      ],
+      "id": "0ba77bea-60db-462d-9729-1d13d9f13900",
+      "name": "Append row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        816
+      ],
+      "id": "81ac4fe6-5cd3-4436-a177-c1a2ae7a2b6d",
+      "name": "Update row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('techwelder lookup').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('techwelder lookup').item.json.GATEPASSNO }}",
+            "DESIGNATION": "={{ $('techwelder lookup').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('techwelder lookup').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('techwelder lookup').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('techwelder lookup').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('techwelder lookup').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        1072
+      ],
+      "id": "0c09b209-1f4b-47ab-b6f9-c5d2040fab10",
+      "name": "Append row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "GATEPASSNO",
+              "lookupValue": "={{ $json.GATEPASSNO }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2288,
+        512
+      ],
+      "id": "8ae12273-e0c0-4fc8-94fd-5500ae42f536",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7dfd063b-0619-4a7b-8be7-61321d9afde0",
+              "leftValue": "={{ $items().length > 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1872,
+        512
+      ],
+      "id": "f49506e2-9b19-437b-ab16-0b8c19634c97",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1456,
+        400
+      ],
+      "id": "c8d0bbe1-8435-4dd4-8ccd-5411973c0023",
+      "name": "Update row in sheet4",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('if amount > 40000').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('if amount > 40000').item.json.GATEPASSNO }}",
+            "DESIGNATION": "={{ $('if amount > 40000').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('if amount > 40000').item.json.IFSC }}",
+            "IFSC": "={{ $('if amount > 40000').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('if amount > 40000').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('if amount > 40000').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1456,
+        608
+      ],
+      "id": "30665f0d-3ed9-41b1-8475-a26c1d31bbc6",
+      "name": "Append row in sheet4",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "277ceedc-b555-4379-8ee3-119e82d0c6cf",
+              "leftValue": "={{ $json['AMOUNT '] }}",
+              "rightValue": 40000,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2592,
+        784
+      ],
+      "id": "69d98f37-ef34-46df-bb3f-17f91c4f4726",
+      "name": "if amount > 40000"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "GATEPASSNO",
+              "lookupValue": "={{ $json.GATEPASSNO }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2304,
+        960
+      ],
+      "id": "73db536e-f560-436e-8ac0-3947f2b459b9",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b1e1c494-ccad-4cd6-8c56-fac0662c4a7c",
+              "leftValue": "={{ $items().length > 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1776,
+        960
+      ],
+      "id": "e2fb85d7-0f05-403d-a8b0-7163391f3fe6",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1360,
+        864
+      ],
+      "id": "d177ea99-b2e2-447c-a54a-679bf45ca102",
+      "name": "Update row in sheet5",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('if amount > 40000').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('if amount > 40000').item.json.GATEPASSNO }}",
+            "DESIGNATION": "={{ $('if amount > 40000').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('if amount > 40000').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('if amount > 40000').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('if amount > 40000').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('if amount > 40000').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1360,
+        1056
+      ],
+      "id": "8d475ff6-0a61-43f4-aeef-cdd8325f7f0c",
+      "name": "Append row in sheet5",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "ad7c5e42-fb5b-44ab-b739-81c6325eb97f",
+              "leftValue": "={{ $json.STATUS }}",
+              "rightValue": "PAID",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2672,
+        -944
+      ],
+      "id": "f151d781-0dba-4e28-9ac9-195a319e45ff",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "GATEPASSNO",
+              "lookupValue": "={{ $json.GATEPASSNO }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2432,
+        -1184
+      ],
+      "id": "4c000152-468b-48cc-8fa5-cd80d432e3f6",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "GATEPASSNO",
+              "lookupValue": "={{ $json.GATEPASSNO }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2400,
+        -704
+      ],
+      "id": "5f922907-c7d3-40ee-b02f-33aa67ddb955",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "58e696b5-ae8a-4f6f-a973-d411383f9761",
+              "leftValue": "={{ $items().length > 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1872,
+        -1184
+      ],
+      "id": "f03113f3-2665-4848-833d-e5edea84310b",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "78668d16-0b12-415b-921f-4931f1a18b28",
+              "leftValue": "={{ $items().length > 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1904,
+        -672
+      ],
+      "id": "25723537-6879-4da1-99f8-7eefcd7a6560",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $('If3').item.json.GATEPASSNO }}",
+            "NAME": "={{ $('If3').item.json.NAME }}",
+            "DESIGNATION": "={{ $('If3').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('If3').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('If3').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('If3').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('If3').item.json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1456,
+        -1280
+      ],
+      "id": "0b6f5b81-cbc8-4d56-a783-2f03e5027433",
+      "name": "Update row in sheet6",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('If3').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('If3').item.json.GATEPASSNO }}",
+            "ACCOUNT_NO": "={{ $('If3').item.json.ACCOUNT_NO }}",
+            "DESIGNATION": "={{ $('If3').item.json.DESIGNATION }}",
+            "IFSC": "={{ $('If3').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('If3').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('If3').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1456,
+        -1088
+      ],
+      "id": "14d7274b-a1b2-4e20-8d26-8331fb7dedea",
+      "name": "Append row in sheet6",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $('If3').item.json.GATEPASSNO }}",
+            "NAME": "={{ $('If3').item.json.NAME }}",
+            "DESIGNATION": "={{ $('If3').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('If3').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('If3').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('If3').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('If3').item.json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1488,
+        -768
+      ],
+      "id": "05fc4604-cf96-4b2d-943a-fbf76f92f8bd",
+      "name": "Update row in sheet7",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $('If3').item.json.NAME }}",
+            "GATEPASSNO": "={{ $('If3').item.json.GATEPASSNO }}",
+            "DESIGNATION": "={{ $('If3').item.json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $('If3').item.json.ACCOUNT_NO }}",
+            "IFSC": "={{ $('If3').item.json.IFSC }}",
+            "AMOUNT ": "={{ $('If3').item.json['AMOUNT '] }}",
+            "STATUS": "={{ $('If3').item.json.STATUS }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1488,
+        -576
+      ],
+      "id": "db4c4292-3f90-49f8-9293-c30eda19d788",
+      "name": "Append row in sheet7",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1704116186,
+          "mode": "list",
+          "cachedResultName": "Helpers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=1704116186"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        -960
+      ],
+      "id": "99215553-32ee-4bbd-bcb5-d2a8a7ed9c95",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1704116186,
+          "mode": "list",
+          "cachedResultName": "Helpers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=1704116186"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        384,
+        -1056
+      ],
+      "id": "3c7c7a96-e9f7-4a93-8603-ca4ba1bfc66e",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1243281354,
+          "mode": "list",
+          "cachedResultName": "Welders",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=1243281354"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -208,
+        -320
+      ],
+      "id": "6f88e6cf-542f-4e0c-8835-45c82cfea7a1",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1327236208,
+          "mode": "list",
+          "cachedResultName": "Supervisors",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=1327236208"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -176,
+        384
+      ],
+      "id": "a619eb04-adda-4774-aecf-fd0af2d9af9b",
+      "name": "Append or update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "DESIGNATION",
+              "lookupValue": "Supervisor"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -512,
+        384
+      ],
+      "id": "6c81e425-877d-4c78-a75c-baca46039ae7",
+      "name": "Supervisor lookup",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "DESIGNATION",
+              "lookupValue": "Welder"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -496,
+        -320
+      ],
+      "id": "78746c42-01b1-4e49-b892-627ee186d03a",
+      "name": "Welder lookup",
+      "alwaysOutputData": false,
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1841004180,
+          "mode": "list",
+          "cachedResultName": "Tech Welders",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=1841004180"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -192,
+        960
+      ],
+      "id": "49d2c6fd-7911-4a16-a437-3a61f6f7f42b",
+      "name": "Append or update row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 888489434,
+          "mode": "list",
+          "cachedResultName": "Paid",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=888489434"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2128,
+        -1184
+      ],
+      "id": "602cb8a9-dd47-4b76-8030-9507d70fbfef",
+      "name": "Append or update row in sheet4",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1888110628,
+          "mode": "list",
+          "cachedResultName": "Unpaid",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=1888110628"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2176,
+        -704
+      ],
+      "id": "209319fd-ae61-4c1c-b54f-1662f64cc54e",
+      "name": "Append or update row in sheet5",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 704928213,
+          "mode": "list",
+          "cachedResultName": "High_Amount",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=704928213"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2080,
+        512
+      ],
+      "id": "b35482a2-76e9-46c9-83a4-b1c0c346a90f",
+      "name": "Append or update row in sheet6",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0",
+          "mode": "list",
+          "cachedResultName": "payment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1394906676,
+          "mode": "list",
+          "cachedResultName": "Low_Amount",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k2FhS0d0pVQdpoxyl9kx8nIVBze5wBxO1qMaFxZv0L0/edit#gid=1394906676"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "GATEPASSNO": "={{ $json.GATEPASSNO }}",
+            "NAME": "={{ $json.NAME }}",
+            "DESIGNATION": "={{ $json.DESIGNATION }}",
+            "ACCOUNT_NO": "={{ $json.ACCOUNT_NO }}",
+            "IFSC": "={{ $json.IFSC }}",
+            "AMOUNT ": "={{ $json['AMOUNT '] }}",
+            "STATUS": "={{ $json.STATUS }}"
+          },
+          "matchingColumns": [
+            "GATEPASSNO"
+          ],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GATEPASSNO",
+              "displayName": "GATEPASSNO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESIGNATION",
+              "displayName": "DESIGNATION",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ACCOUNT_NO",
+              "displayName": "ACCOUNT_NO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IFSC",
+              "displayName": "IFSC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AMOUNT ",
+              "displayName": "AMOUNT ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "STATUS",
+              "displayName": "STATUS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2064,
+        960
+      ],
+      "id": "4a227059-d0c9-4ff0-b194-1be8f756d93b",
+      "name": "Append or update row in sheet7",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Helper lookup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Welder lookup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Supervisor lookup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "techwelder lookup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "if amount > 40000",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Helper lookup": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "techwelder lookup": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "row exists?": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "row exists?2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "row exists?1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if amount > 40000": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet6",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supervisor lookup": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Welder lookup": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "44ff50b7-0634-43c3-a4c6-c7f7f26ae158",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6fd5feb91d3c71ea39bc6d8af635b6d3011abdae493a31eaaec4e6a5a5858dda"
+  },
+  "id": "0TV1tr2d7H9CWjPS",
+  "tags": []
+}
