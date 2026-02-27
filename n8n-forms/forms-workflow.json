@@ -1,0 +1,288 @@
+{
+  "name": "form-hello",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Test!!",
+        "formDescription": "Survey!!",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "Name",
+              "fieldLabel": "What is your name?",
+              "requiredField": true
+            },
+            {
+              "fieldName": "Email",
+              "fieldLabel": "Enter your email ID",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldName": "Age",
+              "fieldLabel": "Enter your age",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldName": "Current Occupancy",
+              "fieldLabel": "eg. currently presuing BTech, Job, MBA, BBA, BCA, others...",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "B.Tech ( persuing currently)"
+                  },
+                  {
+                    "option": "BBA"
+                  },
+                  {
+                    "option": "MBA"
+                  },
+                  {
+                    "option": "BCA"
+                  },
+                  {
+                    "option": "MCA"
+                  },
+                  {
+                    "option": "Job"
+                  },
+                  {
+                    "option": "Other courses."
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldName": "Monthly Expense",
+              "fieldLabel": "personal expense",
+              "fieldType": "number",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -176,
+        0
+      ],
+      "id": "5d3cdf1e-4f49-4838-8e70-bc445a05dc90",
+      "name": "On form submission",
+      "webhookId": "778de7d4-f158-439b-a02a-4061b260ac37"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Form Submission Confirmation...",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n</head>\n\n<body style=\"margin:0; padding:0; background-color:#f4f6f9; font-family:Arial, sans-serif;\">\n\n  <table align=\"center\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding:30px 0;\">\n    <tr>\n      <td align=\"center\">\n\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" \n               style=\"background:#ffffff; border-radius:12px; padding:30px; box-shadow:0 4px 12px rgba(0,0,0,0.08);\">\n\n          <!-- Header -->\n          <tr>\n            <td align=\"center\" style=\"padding-bottom:20px;\">\n              <h2 style=\"margin:0; color:#2c3e50;\">🎉 Survey Submission Confirmed</h2>\n              <p style=\"color:#7f8c8d; font-size:14px; margin-top:5px;\">\n                Thank you for participating!\n              </p>\n            </td>\n          </tr>\n\n          <!-- Greeting -->\n          <tr>\n            <td style=\"padding:10px 0;\">\n              <p style=\"font-size:16px; margin:0;\">\n                Hi <strong>{{ $json.Name }}</strong>,\n              </p>\n              <p style=\"color:#555; line-height:1.6;\">\n                We’ve successfully received your survey details. Here’s a quick summary:\n              </p>\n            </td>\n          </tr>\n\n          <!-- Info Card -->\n          <tr>\n            <td>\n              <table width=\"100%\" cellpadding=\"10\" cellspacing=\"0\" \n                     style=\"background:#f9fbfd; border-radius:8px;\">\n\n                <tr>\n                  <td><strong>Email:</strong></td>\n                  <td>{{ $json.Email }}</td>\n                </tr>\n\n                <tr>\n                  <td><strong>Age:</strong></td>\n                  <td>{{ $json.Age }}</td>\n                </tr>\n\n                <tr>\n                  <td><strong>Currently:</strong></td>\n                  <td>{{ $json['Current Occupancy'] }}</td>\n                </tr>\n\n                <tr>\n                  <td><strong>Personal Expense:</strong></td>\n                  <td>₹{{ $json['Monthly Expense'] }}</td>\n                </tr>\n\n              </table>\n            </td>\n          </tr>\n\n          <!-- CTA -->\n          <tr>\n            <td align=\"center\" style=\"padding-top:30px;\">\n              <a href=\"https://www.linkedin.com/in/sumant01\"\n                 style=\"background:#0077B5; color:#ffff; text-decoration:none; padding:12px 25px; border-radius:6px; display:inline-block; font-weight:bold;\">\n                 Contact on LinkedIn\n              </a>\n            </td>\n          </tr>\n\n          <!-- Footer -->\n          <tr>\n            <td align=\"center\" style=\"padding-top:30px; font-size:12px; color:#95a5a6;\">\n              This is an automated confirmation email.<br>\n              Powered by n8n ⚙️\n            </td>\n          </tr>\n\n        </table>\n\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        384,
+        112
+      ],
+      "id": "4687194c-5e3b-497e-ae9a-7e1f08d8ea9e",
+      "name": "Send a message",
+      "webhookId": "d4e76989-7314-4fd9-950d-1165442535e6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5cb10337-1616-4eb4-8ca7-53742d6fdf8a",
+              "name": "Name",
+              "value": "={{ $json.Name }}",
+              "type": "string"
+            },
+            {
+              "id": "80f19926-6a3e-4d05-a294-b53c6dbecb1f",
+              "name": "Email",
+              "value": "={{ $json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "d461170e-a924-44a6-a840-89d5ec63dbed",
+              "name": "Age",
+              "value": "={{ $json.Age }}",
+              "type": "number"
+            },
+            {
+              "id": "39d50e6a-3358-444e-b168-fb95847287c5",
+              "name": "Current Occupancy",
+              "value": "={{ $json['Current Occupancy'] }}",
+              "type": "string"
+            },
+            {
+              "id": "3a8cbc01-79e1-4dba-bb20-cd0745d4dff7",
+              "name": "Monthly Expense",
+              "value": "={{ $json['Monthly Expense'] }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        0
+      ],
+      "id": "594931ae-fa87-4d1e-99d1-b5c709166aaf",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1LwvB07P3xuMMtjeWDGPoRflkyaTN3roQlyUCFjOSQ3E",
+          "mode": "list",
+          "cachedResultName": "Survey Sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LwvB07P3xuMMtjeWDGPoRflkyaTN3roQlyUCFjOSQ3E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1LwvB07P3xuMMtjeWDGPoRflkyaTN3roQlyUCFjOSQ3E/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.Name }}",
+            "Email": "={{ $json.Email }}",
+            "Age": "={{ $json.Age }}",
+            "Current Occupancy": "={{ $json['Current Occupancy'] }}",
+            "Monthly Expense": "={{ $json['Monthly Expense'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Current Occupancy",
+              "displayName": "Current Occupancy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Monthly Expense",
+              "displayName": "Monthly Expense",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        -112
+      ],
+      "id": "f1a51781-0760-47cc-bc82-25ffa52e6227",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "82NIe9vGZBTziLuA",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "b16a1bc9-2200-4576-86d1-1b5c1dbc803b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6fd5feb91d3c71ea39bc6d8af635b6d3011abdae493a31eaaec4e6a5a5858dda"
+  },
+  "id": "4EvWT6JZ82WrdL23",
+  "tags": []
+}
