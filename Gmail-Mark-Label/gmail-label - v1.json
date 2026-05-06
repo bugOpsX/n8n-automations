@@ -1,0 +1,388 @@
+{
+  "name": "gmail-label - v1",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -528,
+        -16
+      ],
+      "id": "41661882-d7b1-43f0-85f5-1e07b029af82",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7e242135-21b9-4449-ad24-f1bfb8f3f387",
+              "name": "text",
+              "value": "={{ ($json.Subject || \"\") + \" \" + ($json.textPlain || $json.textHtml || \"\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -112,
+        -16
+      ],
+      "id": "e63f7549-1af2-4e95-934b-a33e8609809a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ /(internship|intern opportunity|intern offer|summer intern|winter intern|trainee)/i.test($json.label) }}",
+                    "rightValue": "=true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "a29b0391-f082-4bd9-812a-795a4c2dea63"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Internship"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "502131c7-5720-4f2e-a6be-5f5182dbdf47",
+                    "leftValue": "={{ /(hackathon|coding event|dev challenge|buildathon|competition|tech event)/i.test($json.label) }}",
+                    "rightValue": "=true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Hackathon"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "45b28abc-ecdf-4840-a9db-e74f0f1606d0",
+                    "leftValue": "={{ /(delivery|parcel|shipment|courier|tracking|awb|dispatched)/i.test($json.label) }}",
+                    "rightValue": "=true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Parcel or Delivery"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "2790a5f3-bf1e-41f6-80f8-9e7851663684",
+                    "leftValue": "={{ /(loan|emi|credit|pre[- ]?approved|instant loan|personal loan|home loan|loan offer|brcc|mnssby|7[- ]?nishchay)/i\n  .test(($json.label)) }}",
+                    "rightValue": "=true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Loan/BRCC/MNSSBY/7-Nishchay"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        -48
+      ],
+      "id": "a23d6fcc-2ea7-4fd2-addb-6e7c19cc455a",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_2585820715193410425"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        -288
+      ],
+      "id": "64c2f313-0d82-4ef9-80da-cde007d2ea7d",
+      "name": "internship",
+      "webhookId": "4dc352d0-7864-42ea-8bfe-58d814956326",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_8115213616519823213"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        -96
+      ],
+      "id": "96f6acc1-8050-465b-9d3b-978bf1ffef3b",
+      "name": "hackathon",
+      "webhookId": "6bc32949-2649-45fc-b3a4-d1597d482276",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_6043771542371740458"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        288
+      ],
+      "id": "53d57da1-35d1-414a-8977-93af44c0d93d",
+      "name": "loan",
+      "webhookId": "2988fb9f-0a83-4a49-8056-269abed5ed3e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_1620559484826421671"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        96
+      ],
+      "id": "5e74da42-3ee4-4c35-a516-eba0b783eb26",
+      "name": "parcel",
+      "webhookId": "5e355751-c9b2-46f9-ac23-713cb0dc5f2c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Gmail Label\n**This workflow will label mails, in four fields:**\n\n1. Internship\n2. Hackathon\n3. Parcel \n4. Loan\n\n>>**Many Chnages can be made in this workflow, \nthis follows general expression but firther changes for \nfiltering the mails can be done.**\n",
+        "height": 816,
+        "width": 1460
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        -336
+      ],
+      "id": "ab99cd45-103c-45b5-832c-3e7aa9ec83c3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}",
+        "simple": "=",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -320,
+        -16
+      ],
+      "id": "5d742098-c0c0-4d87-bbe5-8a7351e05a6a",
+      "name": "Get a message",
+      "webhookId": "745a147c-f3b7-4312-9120-d21671376574",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "internship",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "hackathon",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "parcel",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "loan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "zWMgk8cWVhsmZ7EV",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "02e4c076-dd8f-4ea6-9dbc-aa3762882259",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6fd5feb91d3c71ea39bc6d8af635b6d3011abdae493a31eaaec4e6a5a5858dda"
+  },
+  "id": "SCsYMJS6DEbwEjqaWdRKI",
+  "tags": []
+}

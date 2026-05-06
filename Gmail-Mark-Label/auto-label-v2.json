@@ -1,0 +1,256 @@
+{
+  "name": "auto-label-v2",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -480,
+        0
+      ],
+      "id": "8f1cac45-6e2a-42d6-87c4-35732d640c69",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -272,
+        0
+      ],
+      "id": "a14509b0-43e0-46f9-8de7-a697775b6f55",
+      "name": "Get a message",
+      "webhookId": "15bb5df7-4a06-4ee3-b7f0-e1e9f4957bc7",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = (\n  ($json.Subject || \"\") + \" \" +\n  ($json.textPlain || $json.textHtml || \"\")\n).toLowerCase();\n\nlet label = \"others\";\n\nif (/internship|intern opportunity|intern offer|trainee/.test(text)) {\n  label = \"Label_2585820715193410425\";\n} \nelse if (/hackathon|coding event|buildathon|competition/.test(text)) {\n  label = \"Label_8115213616519823213\";\n} \nelse if (/delivery|parcel|shipment|tracking|awb/.test(text)) {\n  label = \"Label_1620559484826421671\";\n} \nelse if (/loan|emi|credit|brcc|mnssby|7[- ]?nishchay/.test(text)) {\n  label = \"Label_6043771542371740458\";\n}\n\nreturn [\n  {\n    json: {\n      id: $json.id,\n      label\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -64,
+        0
+      ],
+      "id": "1b3567fb-b60d-4418-ace8-7c131ba8c21a",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bae58228-1ef4-4d45-a834-8837b2807850",
+              "leftValue": "={{ $json.label }}",
+              "rightValue": "others",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        112,
+        0
+      ],
+      "id": "93b76cc8-4b88-4cba-89c5-f4daa3483642",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": "={{ [\"Label_6043771542371740458\"] }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        368,
+        -144
+      ],
+      "id": "7be2936a-db13-4ab6-bf04-d4e43c4e5f5c",
+      "name": "Add label to message",
+      "webhookId": "db69f012-9bec-4793-a5c4-00050494dda6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        368,
+        112
+      ],
+      "id": "084a793f-95ff-46e2-b8d1-e26d154e7dbc",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "content": "## Gmail Label v2\n**This workflow gives the clean and scalable solution for the auto label to the mails by:**\n\n- trigger on message receiving\n- get the mail ( body)\n- use **Fuction Node** to filter out each mail based on:  \n          - Internship\n          - Loan\n          - Hackathon\n          - Parcel\n- Create labels manually in the Gmail\n- Get there Lable_Ids and replace them with Label output in the Funcrtion Node\n\n**And all set**🚀\n       ",
+        "height": 736,
+        "width": 1488
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        -368
+      ],
+      "id": "e3c6908e-144c-42cd-97ee-728062a05504",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "19df867fa63e36de",
+          "threadId": "19df867fa63e36de",
+          "snippet": "Hi there you loan has been approved. Thank you",
+          "payload": {
+            "mimeType": "multipart/alternative"
+          },
+          "sizeEstimate": 7044,
+          "historyId": "1131521",
+          "internalDate": "1777989043000",
+          "labels": [
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "IMPORTANT",
+              "name": "IMPORTANT"
+            },
+            {
+              "id": "CATEGORY_PERSONAL",
+              "name": "CATEGORY_PERSONAL"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "From": "SUMANT KUMAR <sumant.kumar127389@marwadiuniversity.ac.in>",
+          "Subject": "Loan Approaved",
+          "To": "Sumant Kumar <sumantkumar3172@gmail.com>"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Add label to message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "zWMgk8cWVhsmZ7EV",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "d55deda3-3a36-495d-b116-3d03ba4ae6e7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6fd5feb91d3c71ea39bc6d8af635b6d3011abdae493a31eaaec4e6a5a5858dda"
+  },
+  "id": "TH0Q7RobbPHDFW3w",
+  "tags": []
+}
