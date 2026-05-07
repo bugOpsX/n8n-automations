@@ -10,7 +10,7 @@
 ![Complete Workflow](workflow-imgs/v2/complete.png)
 
 ```
-Gmail Trigger → Get a Message → Code in JavaScript → If → Add label / No Operation
+Gmail Trigger → Get a Message  → Code in JavaScript → If → Add label / No Operation
 ```
 
 | # | Node | Purpose |
