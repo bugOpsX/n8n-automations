@@ -1,0 +1,388 @@
+{
+  "name": "Capture Parent Approval",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -944,
+        -96
+      ],
+      "id": "d701ab36-14d1-428c-89ee-294f78c5f503",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3617ad17-d2f3-49d8-9d69-93904dd1bf95",
+              "name": "sender",
+              "value": "={{ ($json.From.match(/<([^>]+)>/) || [,''])[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "7450f90f-c11b-4e28-b788-740628d5cfa1",
+              "name": "snippet",
+              "value": "={{ $json.snippet }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -784,
+        -96
+      ],
+      "id": "e261dade-ce62-4135-ab41-2d9b323f498f",
+      "name": "extract sender"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d2a3f282-2493-4ab1-9b77-487c77b6cc92",
+              "leftValue": "={{$json.parent_mail}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -272,
+        -288
+      ],
+      "id": "01da43ac-930c-43d0-a102-c013f635c630",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        0
+      ],
+      "id": "fb8fbc92-6e97-48ea-887e-0c9a6130cef4",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "40770746-e247-4b36-8f95-eb47590b9a7c",
+              "leftValue": "={{\n$json.snippet &&\n(\n$json.snippet.toLowerCase().includes('leave') ||\n$json.snippet.toLowerCase().includes('gate pass') ||\n$json.snippet.toLowerCase().includes('gatepass')\n)\n}}",
+              "rightValue": "leave",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -624,
+        -96
+      ],
+      "id": "08c9f8d0-d7fc-44b6-a541-f0e0620eb553",
+      "name": "if its about leave approval"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WKX86HlowuuvUYu0",
+          "mode": "list",
+          "cachedResultName": "student_info",
+          "cachedResultUrl": "/projects/HJzMnteF074aXkBe/datatables/WKX86HlowuuvUYu0"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "parent_mail",
+              "keyValue": "={{ $json.sender }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -448,
+        -240
+      ],
+      "id": "3a504192-5a8d-4816-95e6-2810298c1a15",
+      "name": "match if mail is of registered parent"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "vvuhF6k4IPBDfWNd",
+          "mode": "list",
+          "cachedResultName": "approvals",
+          "cachedResultUrl": "/projects/HJzMnteF074aXkBe/datatables/vvuhF6k4IPBDfWNd"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "approved_at": "={{ $json.createdAt }}",
+            "valid_until": "={{$now.plus({hours:12})}}",
+            "parent_mail": "={{ $json.parent_mail }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "parent_mail",
+              "displayName": "parent_mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "approved_at",
+              "displayName": "approved_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "valid_until",
+              "displayName": "valid_until",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        -416
+      ],
+      "id": "187a7ca7-98d3-4157-bbb9-470ff8944e93",
+      "name": "valdate approval till now+12 hours"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -176
+      ],
+      "id": "2e8742a7-d6d9-4b16-ad1e-b3b0c975e0aa",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "content": "## This workflow captures Parent's approval\n**Workflow Explained :**\n- Parent sends a mail regarding leave approval to the hostel administration\n- workflow checks if the mail arrives is from authorized person\n- validate that approval for 12 hourse from the date the request was created\n\n**Now this can be scaled to real enterprise level use by:**\n- linking the workflow with actual database (postgres)\n- instead of taking approvals through email, **SMS** can be used using **Twilio**",
+        "height": 736,
+        "width": 1472,
+        "color": "#130326"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1248,
+        -528
+      ],
+      "id": "2193b55e-4324-4223-b555-1ee9b497019f",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "19e22b900a2461bd",
+          "threadId": "19e22b900a2461bd",
+          "snippet": "Please approve the leave request entered by my ward.",
+          "payload": {
+            "mimeType": "multipart/alternative"
+          },
+          "sizeEstimate": 7069,
+          "historyId": "1138811",
+          "internalDate": "1778698995000",
+          "labels": [
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "IMPORTANT",
+              "name": "IMPORTANT"
+            },
+            {
+              "id": "CATEGORY_PERSONAL",
+              "name": "CATEGORY_PERSONAL"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "From": "Sumant Kumar <sumantkumar2012004@gmail.com>",
+          "Subject": "Gate Pass Approval",
+          "To": "Sumant Kumar <sumantkumar3172@gmail.com>"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "extract sender",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extract sender": {
+      "main": [
+        [
+          {
+            "node": "if its about leave approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "valdate approval till now+12 hours",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if its about leave approval": {
+      "main": [
+        [
+          {
+            "node": "match if mail is of registered parent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "match if mail is of registered parent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2fa67cef-9e04-4cbe-8f96-9837905bcc98",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6fd5feb91d3c71ea39bc6d8af635b6d3011abdae493a31eaaec4e6a5a5858dda"
+  },
+  "id": "jbfloaG7zFRM991d",
+  "tags": [
+    {
+      "updatedAt": "2026-05-13T19:42:22.573Z",
+      "createdAt": "2026-05-13T14:18:26.991Z",
+      "id": "Ke1GYu6em6N3JElz",
+      "name": "auto leave approval/v1"
+    }
+  ]
+}

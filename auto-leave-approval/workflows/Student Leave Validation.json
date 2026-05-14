@@ -1,0 +1,446 @@
+{
+  "name": "Student Leave Validation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Leave Pass",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "student_email",
+              "fieldType": "email"
+            },
+            {
+              "fieldLabel": "reason"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -896,
+        80
+      ],
+      "id": "04b7c4ca-78be-428b-be0f-e99b73fa86c2",
+      "name": "On form submission",
+      "webhookId": "ae0dbb50-1f5e-4290-b27e-24b97350c07d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1bc803ad-7267-4cef-bf13-b3fbe05c37df",
+              "leftValue": "={{$json.parent_mail}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -560,
+        16
+      ],
+      "id": "063b0d4e-38e9-4bb0-b8f8-876375cfd85a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WKX86HlowuuvUYu0",
+          "mode": "list",
+          "cachedResultName": "student_info",
+          "cachedResultUrl": "/projects/HJzMnteF074aXkBe/datatables/WKX86HlowuuvUYu0"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "student_mail",
+              "keyValue": "={{ $json.student_email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -720,
+        16
+      ],
+      "id": "dd58d83d-b384-44b0-b2c0-6aaebf3229f2",
+      "name": "check for student"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "vvuhF6k4IPBDfWNd",
+          "mode": "list",
+          "cachedResultName": "approvals",
+          "cachedResultUrl": "/projects/HJzMnteF074aXkBe/datatables/vvuhF6k4IPBDfWNd"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "parent_mail",
+              "keyValue": "={{ $json.parent_mail }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -352,
+        -112
+      ],
+      "id": "2cef4e8b-c94b-4406-93a0-7b9ee85a0a96",
+      "name": "check for any approvals"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1796b838-e495-43a7-8670-663169a8fd5d",
+              "leftValue": "={{$json.parent_mail}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -176,
+        -192
+      ],
+      "id": "e0c8a453-ee2d-46fc-b4aa-0c691e2d8167",
+      "name": "If approval exists"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.student_email }}",
+        "subject": "Leave Pass Rejected",
+        "emailType": "text",
+        "message": "Before Making any approvals, make sure you have asked your parents to send a mail to the office administration. Regards, Hostel Admin",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        48,
+        -80
+      ],
+      "id": "7551cc56-0e68-41b5-bf9d-a0fde31bd94c",
+      "name": "approval rejected",
+      "webhookId": "8c2ff83e-0d2e-4499-b422-3b2459afc970",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "10cd0112-c811-47ee-a44c-77e7429c785a",
+              "leftValue": "={{ $('On form submission').item.json.submittedAt }}",
+              "rightValue": "={{$json.valid_until}}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        32,
+        -272
+      ],
+      "id": "87bfae6b-73d0-4c4d-ba06-528e8d041cd5",
+      "name": "if approval valid under time"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "gEMLYzvMeL1EXQEZ",
+          "mode": "list",
+          "cachedResultName": "student_leaves",
+          "cachedResultUrl": "/projects/HJzMnteF074aXkBe/datatables/gEMLYzvMeL1EXQEZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "student_mail": "={{ $('On form submission').item.json.student_email }}",
+            "parent_mail": "={{ $json.parent_mail }}",
+            "reason": "={{ $('On form submission').item.json.reason }}",
+            "status": "Approved"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "student_mail",
+              "displayName": "student_mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "parent_mail",
+              "displayName": "parent_mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        -400
+      ],
+      "id": "f1759965-a463-4917-a0cb-bc45aad6dbdd",
+      "name": "update leave status"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.student_mail }},{{ $json.parent_mail }}",
+        "subject": "Gate Pass Approved",
+        "emailType": "text",
+        "message": "Your child has successfully created a leave request.  The request was approved because your approval email was already received.  Regards, Hostel Administration",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        -400
+      ],
+      "id": "960bb081-8e41-44f6-b8aa-489599d35842",
+      "name": "send confirmation message to parent and student",
+      "webhookId": "c7b75bde-5de3-4a70-90f9-8a4ac5472a53",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "X3Lx28y6Ysc5pwzN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## This Workflow Validates Leave by Student\n**Workflow Explained :**\n\n- student fills the form for leave from campus\n- all the checks will be made:\n     - if student available\n     - if the student has approval\n     - if the approval is valid in time\n- if all the checks are true, parent and student both will be notified for the leave pass status\n\n\n**This workflow can be Upgraded :**\n\n- instead of filling the form for leave, this automation can be integrated \nwith the official students app by college/ university\n- and instead of **form node**  this workflow is use **Webhook node** for all these inputs by student\n\n- instead of n8n tables (used for demo), actual database can be connected.",
+        "height": 736,
+        "width": 1616,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1024,
+        -512
+      ],
+      "id": "41cad130-3ce3-4758-862b-6ec727560862",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "student_email": "sumantkumar3172@gmail.com",
+          "reason": "going to rajkot",
+          "submittedAt": "2026-05-14T00:05:24.189+05:30",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "check for student",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "check for any approvals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check for student": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check for any approvals": {
+      "main": [
+        [
+          {
+            "node": "If approval exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If approval exists": {
+      "main": [
+        [
+          {
+            "node": "if approval valid under time",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "approval rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if approval valid under time": {
+      "main": [
+        [
+          {
+            "node": "update leave status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update leave status": {
+      "main": [
+        [
+          {
+            "node": "send confirmation message to parent and student",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "29c2917f-5898-48a1-9477-58c35d98a9a0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6fd5feb91d3c71ea39bc6d8af635b6d3011abdae493a31eaaec4e6a5a5858dda"
+  },
+  "id": "H04iwQy5nfSOr7xu",
+  "tags": [
+    {
+      "updatedAt": "2026-05-13T19:42:22.573Z",
+      "createdAt": "2026-05-13T14:18:26.991Z",
+      "id": "Ke1GYu6em6N3JElz",
+      "name": "auto leave approval/v1"
+    }
+  ]
+}
